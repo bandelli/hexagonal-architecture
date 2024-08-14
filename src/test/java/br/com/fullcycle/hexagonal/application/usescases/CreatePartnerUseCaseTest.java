@@ -76,7 +76,6 @@ public class CreatePartnerUseCaseTest {
         Assertions.assertNotNull(actualException, expectedError);
     }
 
-/*
     @Test
     @DisplayName("Não deve cadastrar um parceiro com e-mail duplicado")
     public void testCreateWithDuplicatedEmailShouldFail() {
@@ -86,7 +85,7 @@ public class CreatePartnerUseCaseTest {
         final var expectedNome = "John Doe";
         final var expectedError = "Partner already exists";
 
-        final var createInput = new CreatePartnerUseCase.Input(expectedCNPJ, expectedEmail, expectedNome);
+        final var createInput = new CreatePartnerUseCase.Input(expectedCNPJ, expectedNome, expectedEmail);
 
         final var aPartner = new Partner();
         aPartner.setId(UUID.randomUUID().getMostSignificantBits());
@@ -98,12 +97,10 @@ public class CreatePartnerUseCaseTest {
         final var partnerService = Mockito.mock(PartnerService.class);
         Mockito.when(partnerService.findByEmail(expectedEmail)).thenReturn(Optional.of(aPartner));
 
-
         final var useCase = new CreatePartnerUseCase(partnerService);
-        final var actualException = Assertions.assertThrows(ValidationException.class,
-                () -> useCase.execute(createInput));
+        final var actualException = Assertions.assertThrows(ValidationException.class, () -> useCase.execute(createInput));
 
         //then
         Assertions.assertNotNull(actualException, expectedError);
-    }*/
+    }
 }
