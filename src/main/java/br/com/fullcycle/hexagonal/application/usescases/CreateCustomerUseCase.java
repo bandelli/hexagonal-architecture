@@ -34,12 +34,7 @@ public class CreateCustomerUseCase extends UseCase<CreateCustomerUseCase.Input, 
 
     public record Input(String cpf, String email, String name) {
     }
-
-    ;
-
     public record Output(Long id, String cpf, String email, String name) {
     }
-
-    ;
 
 }
