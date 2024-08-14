@@ -23,7 +23,7 @@ public class PartnerController {
         try {
             final var useCase = new CreatePartnerUseCase(partnerService);
 
-            final var output = useCase.execute(new CreatePartnerUseCase.Input(dto.getCnpj(), dto.getEmail(), dto.getName()));
+            final var output = useCase.execute(new CreatePartnerUseCase.Input(dto.getCnpj(), dto.getName(), dto.getEmail()));
 
             return ResponseEntity.created(URI.create("/partners/" + output.id())).body(output);
         } catch (ValidationException ex) {

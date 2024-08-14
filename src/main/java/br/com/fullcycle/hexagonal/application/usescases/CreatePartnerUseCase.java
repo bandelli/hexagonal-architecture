@@ -35,9 +35,9 @@ public class CreatePartnerUseCase extends UseCase<CreatePartnerUseCase.Input, Cr
         return new Output(partner.getId(), partner.getCnpj(), partner.getName(), partner.getEmail());
     }
 
-    public record Input(String cnpj, String email, String name) {
+    public record Input(String cnpj, String name, String email) {
     }
 
-    public record Output(Long id, String cnpj, String email, String name) {
+    public record Output(Long id, String cnpj, String name, String email) {
     }
 }
