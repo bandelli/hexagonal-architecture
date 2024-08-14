@@ -13,12 +13,12 @@ import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 
-public class CreateCustomerUseCaseTest {
+public class CreatePartnerUseCaseTest {
 
 
     @Test
     @DisplayName("Deve criar um cliente")
-    public void testCreate() {
+    public void testCreate() throws Exception {
         // given
         final var expectedCPF = "123456789";
         final var expectedEmail = "john.doe@gmail.com";
@@ -50,7 +50,7 @@ public class CreateCustomerUseCaseTest {
 
     @Test
     @DisplayName("Não deve cadastrar um cliente com CPF duplicado")
-    public void testCreateWithDuplicatedCPFShouldFail() {
+    public void testCreateWithDuplicatedCPFShouldFail() throws Exception {
         // given
         final var expectedCPF = "123456789";
         final var expectedEmail = "john.doe@gmail.com";
