@@ -1,7 +1,6 @@
-package br.com.fullcycle.hexagonal.usecases;
+package br.com.fullcycle.hexagonal.application.usescases;
 
 import br.com.fullcycle.hexagonal.application.exceptions.ValidationException;
-import br.com.fullcycle.hexagonal.application.usescases.CreateCustomerUseCase;
 import br.com.fullcycle.hexagonal.models.Customer;
 import br.com.fullcycle.hexagonal.services.CustomerService;
 import org.junit.jupiter.api.Assertions;
@@ -14,7 +13,7 @@ import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 
-public class CreateCustomerTest {
+public class CreateCustomerUseCaseTest {
 
 
     @Test
