@@ -1,5 +1,6 @@
 package br.com.fullcycle.hexagonal.application.usescases;
 
+import br.com.fullcycle.hexagonal.application.exceptions.ValidationException;
 import br.com.fullcycle.hexagonal.models.Customer;
 import br.com.fullcycle.hexagonal.models.Event;
 import br.com.fullcycle.hexagonal.models.TicketStatus;
@@ -95,11 +96,9 @@ class SubscribeCustomerToEventUseCaseTest {
         when(eventService.findById(eventId)).thenReturn(Optional.empty());
 
         final var useCase = new SubscribeCustomerToEventUseCase(customerService, eventService);
-        final var output = useCase.execute(subscribeInput);
+        final var actualError = Assertions.assertThrows(ValidationException.class, () -> useCase.execute(subscribeInput));
 
         // then
-        Assertions.assertEquals(eventId, output.eventId());
-        Assertions.assertNotNull(output.reservedDate());
-        Assertions.assertEquals(TicketStatus.PENDING.name(), output.ticketStatus());
+        Assertions.assertEquals(expectedError, actualError.getMessage());
     }
 }
