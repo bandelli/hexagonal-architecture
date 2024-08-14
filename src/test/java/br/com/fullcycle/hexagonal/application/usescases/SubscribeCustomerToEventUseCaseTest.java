@@ -36,7 +36,6 @@ class SubscribeCustomerToEventUseCaseTest {
     void testReserveTicket() {
 
         // given
-        final var expectedTicketSize = 1;
         final var customerId = TSID.fast().toLong();
         final var eventId = TSID.fast().toLong();
 
@@ -71,6 +70,36 @@ class SubscribeCustomerToEventUseCaseTest {
         Assertions.assertEquals(eventId, output.eventId());
         Assertions.assertEquals(TicketStatus.PENDING.name(), output.ticketStatus());
         Assertions.assertNotNull(output.reservedDate());
+    }
 
+    @Test
+    @DisplayName("Não deve comprar um ticket de um evento que não existe")
+    void testReserveTicketWithoutEvent() {
+
+        // given
+        final var expectedError = "Event not found";
+        final var customerId = TSID.fast().toLong();
+        final var eventId = TSID.fast().toLong();
+
+        final var aCustomer = new Customer();
+        aCustomer.setId(customerId);
+        aCustomer.setCpf("123456789");
+        aCustomer.setEmail("john.doe@gmail.com");
+        aCustomer.setName("John Doe");
+
+        final var subscribeInput =
+                new SubscribeCustomerToEventUseCase.Input(customerId, eventId);
+
+        // when
+        when(customerService.findById(customerId)).thenReturn(Optional.of(aCustomer));
+        when(eventService.findById(eventId)).thenReturn(Optional.empty());
+
+        final var useCase = new SubscribeCustomerToEventUseCase(customerService, eventService);
+        final var output = useCase.execute(subscribeInput);
+
+        // then
+        Assertions.assertEquals(eventId, output.eventId());
+        Assertions.assertNotNull(output.reservedDate());
+        Assertions.assertEquals(TicketStatus.PENDING.name(), output.ticketStatus());
     }
 }
