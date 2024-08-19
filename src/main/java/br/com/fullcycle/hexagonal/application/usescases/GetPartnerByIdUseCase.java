@@ -1,7 +1,7 @@
 package br.com.fullcycle.hexagonal.application.usescases;
 
 import br.com.fullcycle.hexagonal.application.UseCase;
-import br.com.fullcycle.hexagonal.services.PartnerService;
+import br.com.fullcycle.hexagonal.infrastructure.services.PartnerService;
 
 import java.util.Optional;
 
